@@ -1,0 +1,72 @@
+.questionnaire-page {
+  padding: 3rem clamp(1rem, 5vw, 4rem);
+  background: linear-gradient(to bottom right, #d3ebff, #f4faff);
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+}
+
+.questionnaire-title {
+  font-size: clamp(2.25rem, 5vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+  color: #1e2f45;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.questionnaire-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  max-width: 640px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e8ef;
+}
+
+.questionnaire-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2a3c54;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.questionnaire-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.questionnaire-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  outline: none;
+}
+
+.questionnaire-submit {
+  margin-top: 1rem;
+  padding: 0.85rem 1.75rem;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.questionnaire-submit:hover {
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
