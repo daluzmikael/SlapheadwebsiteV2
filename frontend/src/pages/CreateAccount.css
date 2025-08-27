@@ -1,0 +1,86 @@
+.create-account-page {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #cfe7fe, #0080ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 2rem;
+  }
+  
+  .create-account-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .create-account-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+  }
+  
+  .create-account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  
+  .create-account-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: #333;
+  }
+  
+  .create-account-input {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+  }
+  
+  .create-account-input:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  .create-account-button {
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .create-account-button:hover {
+    background-color: #2980b9;
+  }
+  
+  .create-account-error {
+    color: #e53935;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  .create-account-footer {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+  
+  .create-account-link {
+    color: #3498db;
+    text-decoration: underline;
+  }
+  

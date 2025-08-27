@@ -8,7 +8,7 @@ import Nav from './components/nav';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import Landing from './pages/Landing';
-import Adopt from './pages/Adopt';
+import Unlock from './pages/Unlock';
 import Saved from './pages/Saved';
 import FAQ from './pages/FAQ';
 import Events from './pages/Events';
@@ -29,7 +29,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/create-account" element={<CreateAccount />} /> {}
           <Route path="/landing" element={<Landing />} />
-          <Route path="/adopt" element={<Adopt />} />
+          <Route path="/unlock" element={<Unlock />} />
           <Route path="/saved" element={<Saved />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/events" element={<Events />} />

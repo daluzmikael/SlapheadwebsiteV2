@@ -1,0 +1,118 @@
+.matching-page {
+  padding: 3rem clamp(1rem, 5vw, 4rem);
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #d3ebff, #f4faff);
+  font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+}
+
+.matching-title {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 800;
+  color: #1e2f45;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.matching-search {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.matching-input {
+  flex: 1 1 300px;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid #ccd6e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.matching-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  outline: none;
+}
+
+.matching-button {
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+  padding: 0.85rem 1.75rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.matching-button:hover {
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.matching-empty {
+  text-align: center;
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-top: 2rem;
+}
+
+.matching-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.matching-card {
+  background: linear-gradient(to top left, #ffffff, #f9fbfd);
+  border: 1px solid #dce3ec;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.matching-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.matching-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid #e4eaf1;
+}
+
+.matching-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2a3c54;
+  margin-bottom: 0.5rem;
+}
+
+.matching-info {
+  font-size: 1rem;
+  color: #5d6b74;
+  margin-bottom: 0.25rem;
+}
+
+.matching-temperament {
+  font-size: 0.9rem;
+  color: #7d8a97;
+  font-style: italic;
+}
