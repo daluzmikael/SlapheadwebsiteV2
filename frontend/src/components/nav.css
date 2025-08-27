@@ -1,0 +1,94 @@
+/* src/components/Nav.css */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100vh;
+    background-color: #1f2937; /* Tailwind gray-800 */
+    color: white;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+    z-index: 1000;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .sidebar-header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-left: 4rem;
+    padding-top: 0.5rem;
+  }
+  
+  
+  .toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav-links a {
+    color: #e5e7eb;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .nav-links a:hover {
+    background-color: #374151; /* Tailwind gray-700 */
+  }
+  
+  .logout-btn {
+    background-color: #ef4444; /* Tailwind red-500 */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .logout-btn:hover {
+    background-color: #dc2626; /* Tailwind red-600 */
+  }
+
+  .sidebar-toggle-button {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background-color: #1f2937;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    z-index: 1100;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .sidebar-toggle-button:hover {
+    background-color: #374151;
+  }
+  
