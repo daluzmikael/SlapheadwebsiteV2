@@ -103,7 +103,7 @@ def init_db():
         ('Moonlit Eyes', 'slaphead', '4:01', 87, 'n', 'Dream Pop', 2, '/public/lily.jpg'),
         ('Shape of You', 'Ed Sheeran', '3:53', 540, 'n', 'Pop', 3, '/public/bella.jpg'),
         ('Someone Like You', 'Adele', '4:45', 623, 'n', 'Pop Soul', 4, '/public/shadow.jpg'),
-        ('Levitating', 'Dua Lipa', '3:24', 430, 'y', 'Disco Pop', 5, '/public/oreo.jpg'),
+        ('Levitating', 'Dua Lipa', '3:23', 430, 'y', 'Disco Pop', 5, '/public/oreo.jpg'),
         ('Concrete Dreams', 'slaphead', '2:59', 212, 'y', 'Alt Rock', 6, '/placeholder.jpg'),
         ('Blinding Lights', 'The Weeknd', '3:22', 998, 'n', 'Synthwave Pop', 7, '/placeholder.jpg'),
         ('Bad Habit', 'Steve Lacy', '3:50', 315, 'n', 'R&B / Indie', 8, '/placeholder.jpg'),

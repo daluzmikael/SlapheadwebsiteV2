@@ -8,7 +8,7 @@ def get_connection():
 def get_all_users():
     conn = get_connection()
     c = conn.cursor()
-    c.execute("SELECT * FROM users")
+    c.execute("SELECT id, username, email FROM users")
     rows = c.fetchall()
     conn.close()
     return [{"id": row[0], "username": row[1], "email": row[2]} for row in rows]
@@ -61,7 +61,7 @@ def get_song_by_id(song_id):
 def search_songs_by_genre(genre):
     conn = get_connection()
     c = conn.cursor()
-    c.execute("SELECT id, title, ,artist, length, plays, unlocked, genre FROM songs WHERE genre LIKE ?", (f"%{genre}%",))
+    c.execute("SELECT id, title, artist, length, plays, unlocked, genre FROM songs WHERE genre LIKE ?", (f"%{genre}%",))
     rows = c.fetchall()
     conn.close()
     return [{"id": row[0], "title": row[1], "artist": row[2], "length": row[3], "plays": row[4], "unlocked": row[5], "genre": row[6]} for row in rows]
@@ -69,7 +69,7 @@ def search_songs_by_genre(genre):
 def save_song_for_user(user_id, song_id):
     conn = get_connection()
     c = conn.cursor()
-    c.execute("INSERT OR IGNORE INTO saved_songs (user_id, song_id) VALUES (?, ?)", (user_id, song_id))
+    c.execute("INSERT OR IGNORE INTO unlocked_songs (user_id, song_id) VALUES (?, ?)", (user_id, song_id))
     conn.commit()
     conn.close()
 
@@ -79,8 +79,8 @@ def get_saved_songs_for_user(user_id):
     c.execute("""
         SELECT songs.id, songs.title, songs.artist, songs.length, songs.plays, songs.unlocked, songs.genre
         FROM songs
-        JOIN saved_songs ON songs.id = saved_songs.song_id
-        WHERE saved_songs.user_id = ?
+        JOIN unlocked_songs ON songs.id = unlocked_songs.song_id
+        WHERE unlocked_songs.user_id = ?
     """, (user_id,))
     rows = c.fetchall()
     conn.close()
@@ -125,21 +125,20 @@ def search_songs_by_query(query):
     c = conn.cursor()
     q = f"%{query.lower()}%"
     c.execute("""
-        SELECT id, name, species, breed, age, allergen, temperament
+        SELECT id, title, artist, length, plays, unlocked, genre
         FROM songs
-        WHERE LOWER(name) LIKE ?
-           OR LOWER(species) LIKE ?
-           OR LOWER(breed) LIKE ?
-           OR LOWER(temperament) LIKE ?
-           OR LOWER(allergen) LIKE ?
-           OR CAST(age AS TEXT) LIKE ?
-    """, (q, q, q, q, q, query))
+        WHERE LOWER(title) LIKE ?
+           OR LOWER(artist) LIKE ?
+           OR LOWER(length) LIKE ?
+           OR LOWER(genre) LIKE ?
+    """, (q, q, q, q))
     rows = c.fetchall()
     conn.close()
     return [
         {
-            "id": row[0], "name": row[1], "species": row[2], "breed": row[3],
-            "age": row[4], "allergen": row[5], "temperament": row[6]
+            "id": row[0], "title": row[1], "artist": row[2],
+            "length": row[3], "plays": row[4],
+            "unlocked": row[5], "genre": row[6]
         }
         for row in rows
     ]

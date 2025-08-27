@@ -11,23 +11,23 @@ from db import (
 
 '''Sons API'''
 
-pet_api = Blueprint('song_api', __name__)
+song_api = Blueprint('song_api', __name__)
 
-@pet_api.route('/pets', methods=['GET'])
-def get_pets():
-    pets = get_all_pets()
-    return jsonify(pets)
+@song_api.route('/songs', methods=['GET'])
+def get_songs():
+    songs = get_all_songs()
+    return jsonify(songs)
 
-@pet_api.route('/pets/<int:pet_id>', methods=['GET'])
-def get_pet(pet_id):
-    pet = get_pet_by_id(pet_id)
-    if pet:
-        return jsonify(pet)
+@song_api.route('/songs/<int:song_id>', methods=['GET'])
+def get_song(song_id):
+    song = get_song_by_id(song_id)
+    if song:
+        return jsonify(song)
     else:
-        return jsonify({"error": "Pet not found"}), 404
+        return jsonify({"error": "Song not found"}), 404
 
-@pet_api.route('/pets/<int:pet_id>/save', methods=['POST'])
-def save_pet(pet_id):
+@song_api.route('/songs/<int:song_id>/save', methods=['POST'])
+def save_song(song_id):
     data = request.get_json()
     user_id = data.get("user_id")
 
@@ -35,39 +35,39 @@ def save_pet(pet_id):
     try:
         conn = get_connection()
         c = conn.cursor()
-        c.execute("INSERT INTO saved_pets (user_id, pet_id) VALUES (?, ?)", (user_id, pet_id))
+        c.execute("INSERT INTO saved_songs (user_id, song_id) VALUES (?, ?)", (user_id, song_id))
         conn.commit()
-        return jsonify({"message": f"Pet {pet_id} saved for user {user_id}"}), 200
+        return jsonify({"message": f"song {song_id} saved for user {user_id}"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     finally:
         if conn:
             conn.close()
 
-@pet_api.route('/pets/<int:pet_id>/unsave', methods=['DELETE'])
-def unsave_pet(pet_id):
+@song_api.route('/songs/<int:song_id>/unsave', methods=['DELETE'])
+def unsave_song(song_id):
     data = request.get_json()
     user_id = data.get("user_id")
 
     conn = get_connection()
     c = conn.cursor()
-    c.execute("DELETE FROM saved_pets WHERE user_id = ? AND pet_id = ?", (user_id, pet_id))
+    c.execute("DELETE FROM saved_songs WHERE user_id = ? AND song_id = ?", (user_id, song_id))
     conn.commit()
     conn.close()
 
-    return jsonify({"message": f"Pet {pet_id} unsaved for user {user_id}"}), 200
+    return jsonify({"message": f"song {song_id} unsaved for user {user_id}"}), 200
 
-@pet_api.route('/pets/saved/<int:user_id>', methods=['GET'])
-def get_saved_pets(user_id):
-    pets = get_saved_pets_for_user(user_id)
-    return jsonify(pets)
+@song_api.route('/songs/saved/<int:user_id>', methods=['GET'])
+def get_saved_songs(user_id):
+    songs = get_saved_songs_for_user(user_id)
+    return jsonify(songs)
 
-@pet_api.route('/pets/search', methods=['GET'])
-def search_pets_by_query_route():
+@song_api.route('/songs/search', methods=['GET'])
+def search_songs_by_query_route():
     query = request.args.get('query', '').strip()
     if not query:
-        return jsonify(get_all_pets())
-    results = search_pets_by_query(query)
+        return jsonify(get_all_songs())
+    results = search_songs_by_query(query)
     print(f"Query: {query}, Matches: {len(results)}")
     return jsonify(results)
 
