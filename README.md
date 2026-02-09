@@ -56,9 +56,10 @@ pip install -r requirements.txt
 
 ### Initialize Database
 
-`python init_db.py`  
-Run backend  
-`python main.py`    
+```
+python init_db.py  
+python main.py  #Run backend  
+```    
 Backend runs at: `http://127.0.0.1:5000`  
 
 ##Frontend
@@ -107,8 +108,6 @@ Runs at: `http://localhost:3000`
 - Deployment to cloud hosting (Docker-based)
 
 ## Author
-Author
-
 Mikael Daluz  
 Computer Science @ UConn  
 Full-stack / Data-oriented developer  
