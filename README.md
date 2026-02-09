@@ -3,7 +3,7 @@
 
 ## Backend Architecture
 
-- *Flask* app with modular route files
+- ***Flask*** app with modular route files
 - REST-style API design
 - SQLite for persistence
 - Clear separation by domain:
