@@ -56,11 +56,11 @@ pip install -r requirements.txt
 
 ### Initialize Database
 
-`python init_db.py`
-Run backend
-`python main.py`
-Backend runs at:
-`http://127.0.0.1:5000`
+`python init_db.py`  
+Run backend  
+`python main.py`  
+Backend runs at:  
+`http://127.0.0.1:5000`  
 
 
 
