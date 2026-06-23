@@ -1,31 +1,44 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import SongPlayer from "../components/SongPlayer";
+import { getSongDisplayTitle } from "../utils/songAudio";
 import "./Saved.css";
 
 export default function Saved() {
-  const [pets, setPets] = useState([]);
+  const [songs, setSongs] = useState([]);
   const [events, setEvents] = useState([]);
+  const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/pets/saved/${userId}`)
-      .then(res => res.json())
-      .then(data => setPets(data));
+    if (!userId) {
+      navigate("/?error=login_required");
+      return;
+    }
+
+    fetch(`http://localhost:5000/api/songs/saved/${userId}`)
+      .then(res => (res.ok ? res.json() : []))
+      .then(data => setSongs(data));
 
     fetch(`http://localhost:5000/api/events/rsvped/${userId}`)
-      .then(res => res.json())
+      .then(res => (res.ok ? res.json() : []))
       .then(data => setEvents(data));
-  }, [userId]);
+  }, [userId, navigate]);
 
-  const handleUnsavePet = (petId) => {
-    fetch(`http://localhost:5000/api/pets/${petId}/unsave`, {
+  const handleUnsaveSong = (songId) => {
+    fetch(`http://localhost:5000/api/songs/${songId}/unsave`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user_id: userId }),
+      body: JSON.stringify({ user_id: Number(userId) }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then(res => res.json().then(data => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        if (!ok) {
+          alert(data.error || "Remove failed");
+          return;
+        }
         alert(data.message);
-        setPets(prev => prev.filter(pet => pet.id !== petId));
+        setSongs(prev => prev.filter(song => song.id !== songId));
       })
       .catch(err => console.error("Unsave failed:", err));
   };
@@ -34,10 +47,14 @@ export default function Saved() {
     fetch(`http://localhost:5000/api/events/${eventId}/rsvp`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user_id: userId }),
+      body: JSON.stringify({ user_id: Number(userId) }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then(res => res.json().then(data => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        if (!ok) {
+          alert(data.error || "Remove RSVP failed");
+          return;
+        }
         alert(data.message);
         setEvents(prev => prev.filter(e => e.id !== eventId));
       })
@@ -46,43 +63,46 @@ export default function Saved() {
 
   return (
     <div className="saved-page">
-      <h2 className="saved-title">Your Saved Pets & Events</h2>
+      <h2 className="saved-title">Your Saved Songs & Events</h2>
 
-      <h3></h3>
+      <h3 className="saved-section-title">Saved Songs</h3>
       <div className="saved-grid">
-        {pets.map(p => (
-          <div key={p.id} className="pet-card">
-            <img
-              src={`/images/${p.image || "placeholder.jpg"}`}
-              className="pet-image"
-              alt={p.name || "Saved Pet"}
-            />
-            <p className="pet-name">{p.name}</p>
-            <p>{p.species}</p>
-            <button
-              className="save-button"
-              onClick={() => handleUnsavePet(p.id)}
-            >
-              Unsave Pet
-            </button>
-          </div>
-        ))}
+        {songs.length === 0 ? (
+          <p>No saved songs yet.</p>
+        ) : (
+          songs.map(s => (
+            <div key={s.id} className="song-card">
+              <h3 className="song-title">{getSongDisplayTitle(s)}</h3>
+              <SongPlayer song={s} />
+              <button
+                className="save-button"
+                onClick={() => handleUnsaveSong(s.id)}
+              >
+                Remove
+              </button>
+            </div>
+          ))
+        )}
       </div>
 
-      <h3 className="mt-8"></h3>
+      <h3 className="saved-section-title">RSVPed Events</h3>
       <div className="saved-grid">
-        {events.map(e => (
-          <div key={e.id} className="pet-card">
-            <p className="pet-name">{e.name}</p>
-            <p>{e.date}</p>
-            <button
-              className="save-button"
-              onClick={() => handleUnRSVP(e.id)}
-            >
-              Remove RSVP
-            </button>
-          </div>
-        ))}
+        {events.length === 0 ? (
+          <p>No RSVPs yet.</p>
+        ) : (
+          events.map(e => (
+            <div key={e.id} className="event-card-saved">
+              <p className="song-title">{e.name}</p>
+              <p>{e.date}</p>
+              <button
+                className="save-button"
+                onClick={() => handleUnRSVP(e.id)}
+              >
+                Remove RSVP
+              </button>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

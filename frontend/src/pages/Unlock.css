@@ -1,4 +1,4 @@
-.adopt-page {
+.unlock-page {
   padding: 3rem clamp(1rem, 5vw, 4rem);
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(to bottom right, #d0e8ff, #f4f9ff);
@@ -6,62 +6,89 @@
   box-sizing: border-box;
 }
 
-.adopt-title {
+.unlock-title {
   text-align: center;
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   margin-bottom: 3rem;
   color: #1c2e4a;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-  letter-spacing: 0.5px;
 }
 
-.pets-grid {
+.unlock-grid {
   display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.pet-card {
-  background: linear-gradient(to top left, #ffffff, #f9fcff);
+.song-card {
+  background: #fff;
   border: 1px solid #d4dbe0;
-  border-radius: 16px;
-  padding: 2rem;
+  border-radius: 12px;
+  padding: 1.5rem;
   text-align: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 180px;
+}
+
+.song-card--playable {
+  border-color: #4facfe;
+}
+
+.song-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2a3f5f;
+  margin: 0 0 1rem;
+}
+
+.song-meta {
+  font-size: 0.9rem;
+  color: #5e6d75;
+  margin: -0.5rem 0 1rem;
+}
+
+.song-audio {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.song-audio-locked {
+  background: #eef2f6;
+  border: 1px solid #d4dbe0;
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 1rem;
+  opacity: 0.85;
+}
+
+.song-audio-locked-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #7a8794;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.song-audio-locked-bar {
+  height: 6px;
+  background: #d4dbe0;
+  border-radius: 999px;
   overflow: hidden;
 }
 
-.pet-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-}
-
-.pet-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 1.25rem;
-  border: 2px solid #e0e6eb;
-}
-
-.pet-name {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2a3f5f;
-  margin-bottom: 0.75rem;
-}
-
-.pet-details {
-  font-size: 1rem;
-  color: #5e6d75;
-  margin-bottom: 1.25rem;
-  line-height: 1.6;
+.song-audio-locked-track {
+  display: block;
+  width: 35%;
+  height: 100%;
+  background: #b0bcc8;
+  border-radius: 999px;
 }
 
 .save-button {
@@ -73,11 +100,14 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: auto;
 }
 
-.save-button:hover {
+.save-button:hover:not(:disabled) {
   background: linear-gradient(to right, #00c6ff, #0072ff);
-  transform: scale(1.05);
+}
+
+.save-button:disabled {
+  opacity: 0.6;
+  cursor: default;
 }

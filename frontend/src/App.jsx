@@ -30,12 +30,14 @@ function App() {
           <Route path="/create-account" element={<CreateAccount />} /> {}
           <Route path="/landing" element={<Landing />} />
           <Route path="/unlock" element={<Unlock />} />
+          <Route path="/song" element={<Unlock />} />
           <Route path="/saved" element={<Saved />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/events" element={<Events />} />
           <Route path="/guide" element={<Guide />} />
           <Route path="/questionnaire" element={<Questionnaire />} />
           <Route path="/matching" element={<Matching />} />
+          <Route path="/search" element={<Matching />} />
         </Routes>
       </div>
     </>

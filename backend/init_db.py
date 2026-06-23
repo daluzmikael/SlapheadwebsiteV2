@@ -25,7 +25,8 @@ def init_db():
             unlocked TEXT NOT NULL,
             genre TEXT NOT NULL,
             user_id INTEGER,
-            image TEXT NOT NULL,
+            image TEXT,
+            audio TEXT,
             FOREIGN KEY(user_id) REFERENCES users(id)
         )
     ''')
@@ -99,35 +100,35 @@ def init_db():
 
     # Sample songs
     songs = [
-        ('Golden Skies', 'slaphead', '3:42', 124, 'y', 'Indie Rock', 1, '/public/max.jpg'),
-        ('Moonlit Eyes', 'slaphead', '4:01', 87, 'n', 'Dream Pop', 2, '/public/lily.jpg'),
-        ('Shape of You', 'Ed Sheeran', '3:53', 540, 'n', 'Pop', 3, '/public/bella.jpg'),
-        ('Someone Like You', 'Adele', '4:45', 623, 'n', 'Pop Soul', 4, '/public/shadow.jpg'),
-        ('Levitating', 'Dua Lipa', '3:23', 430, 'y', 'Disco Pop', 5, '/public/oreo.jpg'),
-        ('Concrete Dreams', 'slaphead', '2:59', 212, 'y', 'Alt Rock', 6, '/placeholder.jpg'),
-        ('Blinding Lights', 'The Weeknd', '3:22', 998, 'n', 'Synthwave Pop', 7, '/placeholder.jpg'),
-        ('Bad Habit', 'Steve Lacy', '3:50', 315, 'n', 'R&B / Indie', 8, '/placeholder.jpg'),
-        ('HUMBLE.', 'Kendrick Lamar', '2:57', 811, 'n', 'Hip Hop', 1, '/placeholder.jpg'),
-        ('Viva La Vida', 'Coldplay', '4:04', 712, 'n', 'Alternative Rock', 2, '/placeholder.jpg'),
-        ('Bohemian Rhapsody', 'Queen', '5:55', 1500, 'n', 'Classic Rock', 3, '/placeholder.jpg'),
-        ('Watermelon Sugar', 'Harry Styles', '2:54', 560, 'n', 'Pop Rock', 4, '/placeholder.jpg'),
-        ('Thunderstruck', 'AC/DC', '4:52', 834, 'n', 'Hard Rock', 5, '/placeholder.jpg'),
-        ('Velvet Sunrise', 'slaphead', '3:36', 143, 'y', 'Indie Folk', 6, '/placeholder.jpg'),
-        ("Don't Stop Believin'", 'Journey', '4:10', 1080, 'n', 'Arena Rock', 7, '/placeholder.jpg'),
-        ('Hotel California', 'Eagles', '6:30', 1399, 'y', 'Classic Rock', 8, '/placeholder.jpg'),
-        ('Happy', 'Pharrell Williams', '3:53', 720, 'n', 'Funk Pop', 1, '/placeholder.jpg'),
-        ('Halo', 'Beyoncé', '4:21', 653, 'n', 'Pop R&B', 2, '/placeholder.jpg'),
-        ('Uptown Funk', 'Bruno Mars', '4:29', 820, 'n', 'Funk Pop', 3, '/placeholder.jpg'),
-        ('Fix You', 'Coldplay', '4:55', 345, 'n', 'Alternative Rock', 4, '/placeholder.jpg'),
-        ('Party in the USA', 'Miley Cyrus', '3:22', 590, 'n', 'Pop', 5, '/placeholder.jpg'),
-        ('Neon Shadows', 'slaphead', '3:17', 205, 'n', 'Synth Rock', 6, '/placeholder.jpg'),
-        ('Imagine', 'John Lennon', '3:07', 945, 'y', 'Soft Rock', 7, '/placeholder.jpg'),
-        ('Smells Like Teen Spirit', 'Nirvana', '5:01', 1320, 'y', 'Grunge Rock', 8, '/placeholder.jpg')
+        ('Save Me', 'slaphead', '3:42', 124, 'y', 'Indie Rock', 1, None, 'saveme.mp3'),
+        ('Drunk Trunk', 'slaphead', '4:01', 87, 'y', 'Indie Rock', 2, None, 'drunktrunk.mp3'),
+        ('Shape of You', 'Ed Sheeran', '3:53', 540, 'n', 'Pop', 3, None, None),
+        ('Someone Like You', 'Adele', '4:45', 623, 'n', 'Pop Soul', 4, None, None),
+        ('Levitating', 'Dua Lipa', '3:23', 430, 'y', 'Disco Pop', 5, None, None),
+        ('Concrete Dreams', 'slaphead', '2:59', 212, 'y', 'Alt Rock', 6, None, None),
+        ('Blinding Lights', 'The Weeknd', '3:22', 998, 'n', 'Synthwave Pop', 7, None, None),
+        ('Bad Habit', 'Steve Lacy', '3:50', 315, 'n', 'R&B / Indie', 8, None, None),
+        ('HUMBLE.', 'Kendrick Lamar', '2:57', 811, 'n', 'Hip Hop', 1, None, None),
+        ('Viva La Vida', 'Coldplay', '4:04', 712, 'n', 'Alternative Rock', 2, None, None),
+        ('Bohemian Rhapsody', 'Queen', '5:55', 1500, 'n', 'Classic Rock', 3, None, None),
+        ('Watermelon Sugar', 'Harry Styles', '2:54', 560, 'n', 'Pop Rock', 4, None, None),
+        ('Thunderstruck', 'AC/DC', '4:52', 834, 'n', 'Hard Rock', 5, None, None),
+        ('Velvet Sunrise', 'slaphead', '3:36', 143, 'y', 'Indie Folk', 6, None, None),
+        ("Don't Stop Believin'", 'Journey', '4:10', 1080, 'n', 'Arena Rock', 7, None, None),
+        ('Hotel California', 'Eagles', '6:30', 1399, 'y', 'Classic Rock', 8, None, None),
+        ('Happy', 'Pharrell Williams', '3:53', 720, 'n', 'Funk Pop', 1, None, None),
+        ('Halo', 'Beyoncé', '4:21', 653, 'n', 'Pop R&B', 2, None, None),
+        ('Uptown Funk', 'Bruno Mars', '4:29', 820, 'n', 'Funk Pop', 3, None, None),
+        ('Fix You', 'Coldplay', '4:55', 345, 'n', 'Alternative Rock', 4, None, None),
+        ('Party in the USA', 'Miley Cyrus', '3:22', 590, 'n', 'Pop', 5, None, None),
+        ('Neon Shadows', 'slaphead', '3:17', 205, 'n', 'Synth Rock', 6, None, None),
+        ('Imagine', 'John Lennon', '3:07', 945, 'y', 'Soft Rock', 7, None, None),
+        ('Smells Like Teen Spirit', 'Nirvana', '5:01', 1320, 'y', 'Grunge Rock', 8, None, None)
   ]
 
 
     c.executemany(
-        "INSERT OR IGNORE INTO songs (title, artist, length, plays, unlocked, genre, user_id, image) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        "INSERT OR IGNORE INTO songs (title, artist, length, plays, unlocked, genre, user_id, image, audio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
         songs
     )
 

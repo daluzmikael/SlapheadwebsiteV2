@@ -23,6 +23,28 @@ def get_user_by_email(email):
         return {"id": row[0], "username": row[1], "email": row[2], "password": row[3]}
     return None
 
+def get_user_by_id(user_id):
+    conn = get_connection()
+    c = conn.cursor()
+    c.execute("SELECT id, username, email FROM users WHERE id = ?", (user_id,))
+    row = c.fetchone()
+    conn.close()
+    if row:
+        return {"id": row[0], "username": row[1], "email": row[2]}
+    return None
+
+def _song_row_to_dict(row):
+    return {
+        "id": row[0],
+        "title": row[1],
+        "artist": row[2],
+        "length": row[3],
+        "plays": row[4],
+        "unlocked": row[5],
+        "genre": row[6],
+        "image": row[7] if len(row) > 7 else None,
+    }
+
 def create_user(username, email, password):
     try:
         conn = get_connection()
@@ -45,18 +67,18 @@ def update_user_profile(user_id, username, email):
 def get_all_songs():
     conn = get_connection()
     c = conn.cursor()
-    c.execute("SELECT id, title, artist, length, plays, unlocked, genre FROM songs")
+    c.execute("SELECT id, title, artist, length, plays, unlocked, genre, image FROM songs")
     rows = c.fetchall()
     conn.close()
-    return [{"id": row[0], "title": row[1], "artist": row[2], "length": row[3], "plays": row[4], "unlocked": row[5], "genre": row[6]} for row in rows]
+    return [_song_row_to_dict(row) for row in rows]
 
 def get_song_by_id(song_id):
     conn = get_connection()
     c = conn.cursor()
-    c.execute("SELECT id, title, artist, length, plays, unlocked, genre FROM songs WHERE id = ?", (song_id,))
+    c.execute("SELECT id, title, artist, length, plays, unlocked, genre, image FROM songs WHERE id = ?", (song_id,))
     row = c.fetchone()
     conn.close()
-    return {"id": row[0], "title": row[1], "artist": row[2], "length": row[3], "plays": row[4], "unlocked": row[5], "genre": row[6]} if row else None
+    return _song_row_to_dict(row) if row else None
 
 def search_songs_by_genre(genre):
     conn = get_connection()
@@ -77,14 +99,14 @@ def get_saved_songs_for_user(user_id):
     conn = get_connection()
     c = conn.cursor()
     c.execute("""
-        SELECT songs.id, songs.title, songs.artist, songs.length, songs.plays, songs.unlocked, songs.genre
+        SELECT songs.id, songs.title, songs.artist, songs.length, songs.plays, songs.unlocked, songs.genre, songs.image
         FROM songs
         JOIN unlocked_songs ON songs.id = unlocked_songs.song_id
         WHERE unlocked_songs.user_id = ?
     """, (user_id,))
     rows = c.fetchall()
     conn.close()
-    return [{"id": row[0], "title": row[1], "artist": row[2], "length": row[3], "plays": row[4], "unlocked": row[5], "genre": row[6]} for row in rows]
+    return [_song_row_to_dict(row) for row in rows]
 
 def save_rsvp_for_user(user_id, event_id):
     """Save a user RSVP for an event if not already saved."""
@@ -125,7 +147,7 @@ def search_songs_by_query(query):
     c = conn.cursor()
     q = f"%{query.lower()}%"
     c.execute("""
-        SELECT id, title, artist, length, plays, unlocked, genre
+        SELECT id, title, artist, length, plays, unlocked, genre, image
         FROM songs
         WHERE LOWER(title) LIKE ?
            OR LOWER(artist) LIKE ?
@@ -134,25 +156,7 @@ def search_songs_by_query(query):
     """, (q, q, q, q))
     rows = c.fetchall()
     conn.close()
-    return [
-        {
-            "id": row[0], "title": row[1], "artist": row[2],
-            "length": row[3], "plays": row[4],
-            "unlocked": row[5], "genre": row[6]
-        }
-        for row in rows
-    ]
-
-
-    return [{
-        "id": row[0],
-        "name": row[1],
-        "species": row[2],
-        "breed": row[3],
-        "age": row[4],
-        "allergen": row[5],
-        "temperament": row[6]
-    } for row in rows]
+    return [_song_row_to_dict(row) for row in rows]
 
 def get_questionnaire_responses():
     conn = get_connection()
