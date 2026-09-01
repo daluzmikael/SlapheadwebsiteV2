@@ -41,10 +41,6 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-.pet-image {
-  display: none;
-}
-
 .song-card {
   background: #fff;
   border: 1px solid #d4dbe0;

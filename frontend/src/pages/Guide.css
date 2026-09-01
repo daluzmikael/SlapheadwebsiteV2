@@ -8,74 +8,182 @@
 
 .guide-title {
   text-align: center;
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
-  margin-bottom: 3rem;
+  margin-bottom: 0.75rem;
   color: #1e2e45;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
-  letter-spacing: 0.5px;
 }
 
-.guide-grid {
+.guide-subtitle {
+  text-align: center;
+  color: #5e6b74;
+  margin: 0 auto 2.5rem;
+  max-width: 520px;
+}
+
+.guide-back-button {
+  background: #fff;
+  border: 1px solid #dce3ec;
+  border-radius: 8px;
+  padding: 0.55rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2a3c54;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+.guide-back-button:hover {
+  background: #f0f7ff;
+}
+
+.artist-grid {
   display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.guide-card {
+.artist-card {
   background: linear-gradient(to top left, #ffffff, #f9fbfd);
   border: 1px solid #dce3ec;
   border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.guide-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-}
-
-.guide-image {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-bottom: 1px solid #e4eaf1;
-}
-
-.guide-card-content {
-  padding: 2rem;
+  padding: 1.75rem 1.5rem;
   text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
 }
 
-.guide-card-title {
-  font-size: 1.5rem;
+.artist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  border-color: #4facfe;
+}
+
+.artist-avatar {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #4facfe, #00c6ff);
+  box-shadow: 0 4px 12px rgba(79, 172, 254, 0.35);
+}
+
+.artist-card-name {
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  color: #2a3c54;
+  margin: 0 0 0.35rem;
+}
+
+.artist-card-count {
+  margin: 0 0 0.5rem;
+  color: #5e6b74;
+  font-size: 0.95rem;
+}
+
+.artist-card-genres {
+  margin: 0;
+  color: #7a8794;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.artist-card-badge {
+  display: inline-block;
+  margin-top: 0.85rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: #e8f4ff;
+  color: #1a6fb5;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.artist-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto 2.5rem;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #dce3ec;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.artist-profile-header .artist-avatar {
+  width: 96px;
+  height: 96px;
+  margin: 0;
+  flex-shrink: 0;
+  font-size: 2.25rem;
+}
+
+.artist-profile-name {
+  text-align: left;
+  margin-bottom: 0.35rem;
+}
+
+.artist-profile-meta {
+  margin: 0 0 0.35rem;
+  color: #5e6b74;
+}
+
+.artist-profile-genres {
+  margin: 0;
+  color: #7a8794;
+  font-size: 0.95rem;
+}
+
+.artist-catalog {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.catalog-card {
+  background: #fff;
+  border: 1px solid #dce3ec;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.catalog-card--playable {
+  border-color: #4facfe;
+}
+
+.catalog-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: #2a3c54;
 }
 
-.guide-card-list {
-  padding: 0;
-  margin: 0;
+.catalog-meta {
+  margin: 0 0 1rem;
+  color: #7a8794;
+  font-size: 0.9rem;
 }
 
-.guide-card-list li {
-  margin-bottom: 0.5rem;
-  padding-left: 0.75rem;
-  list-style: none;
-  position: relative;
-  color: #5e6b74;
-  font-size: 1rem;
+.catalog-card .song-audio {
+  width: 100%;
 }
 
-.guide-card-list li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: #3498db;
-  font-size: 1.1rem;
-  line-height: 1;
+.catalog-card .song-audio-locked {
+  margin-bottom: 0;
 }

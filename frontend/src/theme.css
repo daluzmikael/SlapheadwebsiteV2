@@ -1,0 +1,323 @@
+:root {
+  color-scheme: dark;
+  --tm-night: #050711;
+  --tm-night-soft: #090d1a;
+  --tm-surface: #101728;
+  --tm-surface-raised: #172039;
+  --tm-border: #2b3754;
+  --tm-border-bright: #49577a;
+  --tm-text: #eef2ff;
+  --tm-muted: #a5b1cc;
+  --tm-dim: #7f8ba7;
+  --tm-violet: #8b5cf6;
+  --tm-violet-light: #a78bfa;
+  --tm-cyan: #22d3ee;
+  --tm-danger: #fb7185;
+  --tm-page-background:
+    radial-gradient(circle at 12% -10%, rgba(99, 102, 241, 0.25), transparent 34rem),
+    radial-gradient(circle at 92% 8%, rgba(34, 211, 238, 0.12), transparent 30rem),
+    linear-gradient(145deg, var(--tm-night-soft), var(--tm-night) 70%);
+  --tm-card-background: linear-gradient(145deg, rgba(23, 32, 57, 0.96), rgba(12, 17, 32, 0.98));
+  --tm-accent-gradient: linear-gradient(110deg, var(--tm-violet), #6366f1 55%, var(--tm-cyan));
+  --tm-shadow: 0 22px 55px rgba(0, 0, 0, 0.38);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  background: var(--tm-night);
+  color: var(--tm-text);
+}
+
+body {
+  margin: 0;
+}
+
+body .login-page,
+body .create-account-page,
+body .landing-page,
+body .unlock-page,
+body .saved-page,
+body .faq-page,
+body .events-page,
+body .guide-page,
+body .questionnaire-page,
+body .search-page {
+  background: var(--tm-page-background);
+  color: var(--tm-text);
+}
+
+body .login-card,
+body .create-account-card,
+body .landing-content,
+body .questionnaire-form,
+body .song-card,
+body .event-card,
+body .event-card-saved,
+body .faq-item,
+body .artist-card,
+body .artist-profile-header,
+body .catalog-card,
+body .search-card {
+  background: var(--tm-card-background);
+  border: 1px solid var(--tm-border);
+  box-shadow: var(--tm-shadow);
+  color: var(--tm-text);
+}
+
+body .landing-content,
+body .login-card,
+body .create-account-card,
+body .questionnaire-form {
+  backdrop-filter: blur(18px);
+}
+
+body .login-title,
+body .create-account-title,
+body .landing-title,
+body .unlock-title,
+body .saved-title,
+body .saved-section-title,
+body .faq-title,
+body .events-title,
+body .events-section-title,
+body .guide-title,
+body .questionnaire-title,
+body .search-title,
+body .song-title,
+body .event-title,
+body .faq-question,
+body .artist-card-name,
+body .artist-profile-name,
+body .catalog-title,
+body .search-name {
+  color: var(--tm-text);
+}
+
+body .landing-title::after {
+  background: var(--tm-accent-gradient);
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.48);
+}
+
+body .landing-subtitle,
+body .guide-subtitle,
+body .song-meta,
+body .event-details,
+body .faq-answer,
+body .artist-card-count,
+body .artist-profile-meta,
+body .search-subtitle,
+body .search-artist {
+  color: var(--tm-muted);
+}
+
+body .artist-card-genres,
+body .artist-profile-genres,
+body .catalog-meta,
+body .search-genre,
+body .search-empty,
+body .saved-empty,
+body .events-empty {
+  color: var(--tm-dim);
+}
+
+body .login-label,
+body .create-account-label,
+body .questionnaire-label {
+  color: #d9e1f5;
+}
+
+body .login-input,
+body .create-account-input,
+body .questionnaire-input,
+body .search-input {
+  background: rgba(5, 7, 17, 0.72);
+  border: 1px solid var(--tm-border-bright);
+  color: var(--tm-text);
+  caret-color: var(--tm-cyan);
+}
+
+body .login-input::placeholder,
+body .create-account-input::placeholder,
+body .questionnaire-input::placeholder,
+body .search-input::placeholder {
+  color: #697691;
+}
+
+body .login-input:focus,
+body .create-account-input:focus,
+body .questionnaire-input:focus,
+body .search-input:focus {
+  border-color: var(--tm-cyan);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.16);
+  outline: none;
+}
+
+body .login-button,
+body .create-account-button,
+body .questionnaire-submit,
+body .search-button,
+body .event-button,
+body .save-button {
+  background: var(--tm-accent-gradient);
+  color: #ffffff;
+  border: 0;
+  box-shadow: 0 10px 24px rgba(99, 102, 241, 0.24);
+}
+
+body .login-button:hover,
+body .create-account-button:hover,
+body .questionnaire-submit:hover,
+body .search-button:hover,
+body .event-button:hover,
+body .save-button:hover:not(:disabled) {
+  background: linear-gradient(110deg, #7c3aed, #4f46e5 52%, #0891b2);
+  box-shadow: 0 12px 28px rgba(34, 211, 238, 0.18);
+}
+
+body .event-button:disabled,
+body .save-button:disabled {
+  background: #283249;
+  color: #75819c;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+body .login-link,
+body .create-account-link,
+body .song-page-link {
+  color: var(--tm-cyan);
+}
+
+body .login-warning,
+body .login-error,
+body .create-account-error,
+body .search-error {
+  color: var(--tm-danger);
+}
+
+body .song-card--playable,
+body .catalog-card--playable,
+body .search-card--available,
+body .artist-card:hover {
+  border-color: rgba(139, 92, 246, 0.82);
+}
+
+body .song-card:hover,
+body .event-card:hover,
+body .faq-item:hover,
+body .artist-card:hover,
+body .search-card:hover {
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(139, 92, 246, 0.18);
+}
+
+body .song-audio-locked {
+  background: rgba(5, 7, 17, 0.62);
+  border: 1px solid var(--tm-border);
+}
+
+body .song-audio-locked-label {
+  color: var(--tm-muted);
+}
+
+body .song-audio-locked-bar {
+  background: #263149;
+}
+
+body .song-audio-locked-track {
+  background: linear-gradient(90deg, var(--tm-violet), var(--tm-cyan));
+}
+
+body .song-page-link,
+body .guide-back-button {
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.48);
+}
+
+body .song-page-link:hover,
+body .guide-back-button:hover {
+  background: rgba(34, 211, 238, 0.16);
+  border-color: var(--tm-cyan);
+}
+
+body .guide-back-button {
+  color: var(--tm-text);
+}
+
+body .artist-avatar,
+body .search-artwork {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5 48%, #0891b2);
+  color: #fff;
+}
+
+body .artist-card-badge {
+  background: rgba(139, 92, 246, 0.16);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  color: #c4b5fd;
+}
+
+body .search-image {
+  border-color: var(--tm-border);
+}
+
+body .sidebar {
+  background: linear-gradient(180deg, #0b1020, #060812 78%);
+  border-right: 1px solid #222c44;
+  box-shadow: 12px 0 38px rgba(0, 0, 0, 0.24);
+  color: var(--tm-text);
+}
+
+body .sidebar-header h2 {
+  background: var(--tm-accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+body .nav-links a {
+  color: #c8d2e8;
+}
+
+body .nav-links a:hover {
+  background: rgba(139, 92, 246, 0.17);
+  color: #ffffff;
+}
+
+body .logout-btn {
+  background: rgba(251, 113, 133, 0.13);
+  border: 1px solid rgba(251, 113, 133, 0.28);
+  color: #fecdd3;
+}
+
+body .logout-btn:hover {
+  background: rgba(251, 113, 133, 0.24);
+}
+
+body .sidebar-toggle-button {
+  background: #10172a;
+  border: 1px solid var(--tm-border);
+  color: var(--tm-text);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+body audio {
+  color-scheme: dark;
+}
+
+body a:focus-visible,
+body button:focus-visible {
+  outline: 3px solid var(--tm-cyan);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

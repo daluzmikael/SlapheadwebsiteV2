@@ -128,15 +128,18 @@ def init_db():
 
 
     c.executemany(
-        "INSERT OR IGNORE INTO songs (title, artist, length, plays, unlocked, genre, user_id, image, audio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        songs
+        "INSERT OR IGNORE INTO songs (id, title, artist, length, plays, unlocked, genre, user_id, image, audio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [(i + 1, *song) for i, song in enumerate(songs)]
     )
 
     # Sample events
     events = [
         ("Song-a-thon Weekend", "2025-09-04"),
         ("Singing Yoga", "2025-09-10"),
-        ("Summer Artist Café Meetup", "2025-09-15")
+        ("Summer Artist Café Meetup", "2025-09-15"),
+        ("TestMusic Fall Listening Party", "2026-10-17"),
+        ("Independent Artist Showcase", "2026-11-07"),
+        ("Winter Songwriting Workshop", "2026-12-05")
     ]
     c.executemany("INSERT OR IGNORE INTO events (id, name, date) VALUES (?, ?, ?)", [(i+1, e[0], e[1]) for i, e in enumerate(events)])
 

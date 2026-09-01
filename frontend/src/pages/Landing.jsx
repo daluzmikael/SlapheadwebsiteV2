@@ -6,7 +6,7 @@ export default function Landing() {
   return (
     <div className="landing-page">
       <div className="landing-content">
-        <h1 className="landing-title">Welcome to Slapmusic</h1>
+        <h1 className="landing-title">Welcome to TestMusic</h1>
         <p className="landing-subtitle">Logged in as <strong>{email}</strong></p>
       </div>
     </div>

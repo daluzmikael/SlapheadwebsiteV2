@@ -41,7 +41,7 @@ export default function Login() {
   return (
     <div className="login-page">
       <div className="login-card">
-        <h2 className="login-title">Slapmusic Log In</h2>
+        <h2 className="login-title">TestMusic Log In</h2>
         {loginRedirectMsg && (
           <p className="login-warning">{loginRedirectMsg}</p>
         )}

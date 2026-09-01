@@ -14,7 +14,8 @@ import FAQ from './pages/FAQ';
 import Events from './pages/Events';
 import Guide from './pages/Guide';
 import Questionnaire from './pages/Questionnaire';
-import Matching from './pages/Matching';
+import Search from './pages/Search';
+import './theme.css';
 
 function App() {
   const location = useLocation();
@@ -36,8 +37,7 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/guide" element={<Guide />} />
           <Route path="/questionnaire" element={<Questionnaire />} />
-          <Route path="/matching" element={<Matching />} />
-          <Route path="/search" element={<Matching />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </div>
     </>

@@ -3,4 +3,10 @@ __pycache__/
 *.pyc
 CSE2102-Spring25-Team16-main/
 .DS_Store
+.runtime/
+frontend/node_modules/
+frontend/build/
+frontend/.env
+backend/database.db
+.codex-temp/
 

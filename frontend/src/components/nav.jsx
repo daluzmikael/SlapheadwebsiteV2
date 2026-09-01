@@ -4,7 +4,7 @@ import { useState } from 'react';
 import './nav.css';
 
 export default function Nav() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -15,8 +15,12 @@ export default function Nav() {
 
   return (
     <>
-      {/* Toggle button always visible in corner */}
-      <button className="sidebar-toggle-button" onClick={() => setOpen(!open)}>
+      <button
+        className="sidebar-toggle-button"
+        onClick={() => setOpen(!open)}
+        aria-label={open ? 'Hide navigation' : 'Show navigation'}
+        aria-expanded={open}
+      >
         {open ? '×' : '☰'}
       </button>
 
@@ -25,14 +29,14 @@ export default function Nav() {
           <h2>Menu</h2>
         </div>
         <nav className="nav-links">
-          <Link to="/landing" onClick={() => setOpen(false)}>Home</Link>
-          <Link to="/song" onClick={() => setOpen(false)}>Songs</Link>
-          <Link to="/saved" onClick={() => setOpen(false)}>Account</Link>
-          <Link to="/faq" onClick={() => setOpen(false)}>FAQ</Link>
-          <Link to="/events" onClick={() => setOpen(false)}>Events</Link>
-          <Link to="/guide" onClick={() => setOpen(false)}>Guide</Link>
-          <Link to="/questionnaire" onClick={() => setOpen(false)}>Questionnaire</Link>
-          <Link to="/search" onClick={() => setOpen(false)}>Search</Link>
+          <Link to="/landing">Home</Link>
+          <Link to="/song">Songs</Link>
+          <Link to="/saved">Saved</Link>
+          <Link to="/faq">FAQ</Link>
+          <Link to="/events">Events</Link>
+          <Link to="/guide">Artists</Link>
+          <Link to="/questionnaire">Taste Profile</Link>
+          <Link to="/search">Search</Link>
           <button onClick={handleLogout} className="logout-btn">Logout</button>
         </nav>
       </div>

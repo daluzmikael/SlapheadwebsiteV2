@@ -7,10 +7,14 @@ export default function Questionnaire() {
   const navigate = useNavigate();
 
   const questions = [
-    "How old are you?", "How active are you?", "Did you have pets growing up?", "Are you scared of hospitals?",
-    "Would be a tolerant owner?", "Compromises to illness?", "Any financial limitations?", "Did you grow up on a farm?",
-    "Who else do you live with?", "Do you work remotely?", "How many other pets this household?", "What is your Height/Weight?",
-    "Do you have any kids?", "How many older people living with you?"
+    "Which genres do you listen to most?",
+    "Name three artists you keep coming back to.",
+    "Do you prefer high-energy or laid-back music?",
+    "When do you listen most: commuting, working, exercising, or relaxing?",
+    "Do you usually seek new releases or familiar favorites?",
+    "Do you prefer singles, albums, or playlists?",
+    "Which decade of music do you enjoy most?",
+    "Do lyrics or production matter more to you?"
   ];
 
   const handleSubmit = (e) => {
@@ -33,7 +37,7 @@ export default function Questionnaire() {
       })
       .then(data => {
         alert("Questionnaire submitted!");
-        navigate("/matching");
+        navigate("/search");
       })
       .catch(err => {
         console.error("Submit failed:", err);
@@ -43,7 +47,7 @@ export default function Questionnaire() {
 
   return (
     <div className="questionnaire-page">
-      <h2 className="questionnaire-title">Pet Recommendation Questionnaire</h2>
+      <h2 className="questionnaire-title">Listening Profile</h2>
       <form onSubmit={handleSubmit} className="questionnaire-form">
         {questions.map((q, i) => (
           <div key={i}>

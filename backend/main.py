@@ -9,7 +9,7 @@ import os
 
 app = Flask(__name__)
 swagger = Swagger(app)
-CORS(app, origins=["http://localhost:3000"])
+CORS(app, origins=["http://localhost:3000", "http://127.0.0.1:3000"])
 
 SONGS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'songs'))
 

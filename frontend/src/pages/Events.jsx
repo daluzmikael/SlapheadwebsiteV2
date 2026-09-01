@@ -45,7 +45,7 @@ export default function Events() {
       .catch(() => alert('RSVP failed: network error'));
   };
 
-  const EventCard = ({ title, date, location, eventId, rsvped, onRSVP }) => (
+  const EventCard = ({ title, date, location, rsvped, past, onRSVP }) => (
     <div className="event-card">
       <h3 className="event-title">{title}</h3>
       <p className="event-details">📅 {date}</p>
@@ -53,29 +53,46 @@ export default function Events() {
       <button
         className="event-button"
         onClick={onRSVP}
-        disabled={rsvped}
+        disabled={rsvped || past}
       >
-        {rsvped ? 'RSVPed' : 'RSVP'}
+        {past ? 'Event ended' : rsvped ? 'RSVPed' : 'RSVP'}
       </button>
     </div>
   );
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const upcomingEvents = events.filter((event) => new Date(`${event.date}T00:00:00`) >= today);
+  const pastEvents = events.filter((event) => new Date(`${event.date}T00:00:00`) < today);
+
+  const renderEvents = (items, past = false) => items.map((event) => (
+    <EventCard
+      key={event.id}
+      title={event.name}
+      date={event.date}
+      location={event.location || 'Location TBD'}
+      rsvped={rsvpedIds.has(event.id)}
+      past={past}
+      onRSVP={() => handleRSVP(event.id)}
+    />
+  ));
+
   return (
     <div className="events-page">
-      <h2 className="events-title">Upcoming Events</h2>
+      <h2 className="events-title">Events</h2>
+      <h3 className="events-section-title">Upcoming</h3>
       <div className="events-grid">
-        {events.map((event) => (
-          <EventCard
-            key={event.id}
-            eventId={event.id}
-            title={event.name}
-            date={event.date}
-            location={event.location || 'Location TBD'}
-            rsvped={rsvpedIds.has(event.id)}
-            onRSVP={() => handleRSVP(event.id)}
-          />
-        ))}
+        {upcomingEvents.length > 0
+          ? renderEvents(upcomingEvents)
+          : <p className="events-empty">No upcoming events have been announced.</p>}
       </div>
+
+      {pastEvents.length > 0 && (
+        <>
+          <h3 className="events-section-title events-section-title--past">Past events</h3>
+          <div className="events-grid events-grid--past">{renderEvents(pastEvents, true)}</div>
+        </>
+      )}
     </div>
   );
 }

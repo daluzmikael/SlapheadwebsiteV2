@@ -1,6 +1,8 @@
 import sqlite3
+from pathlib import Path
 
-DB_NAME = 'database.db'
+DB_NAME = Path(__file__).with_name('database.db')
+SONGS_DIR = Path(__file__).resolve().parent.parent / 'songs'
 
 def get_connection():
     return sqlite3.connect(DB_NAME)
@@ -34,6 +36,12 @@ def get_user_by_id(user_id):
     return None
 
 def _song_row_to_dict(row):
+    audio = row[8] if len(row) > 8 else None
+    page = None
+    if audio:
+        page_candidate = f"{Path(audio).stem}.html"
+        if (SONGS_DIR / page_candidate).is_file():
+            page = page_candidate
     return {
         "id": row[0],
         "title": row[1],
@@ -43,6 +51,11 @@ def _song_row_to_dict(row):
         "unlocked": row[5],
         "genre": row[6],
         "image": row[7] if len(row) > 7 else None,
+        "audio": audio,
+        "page": page,
+        "audio_missing": bool(audio and not (
+            (SONGS_DIR / audio).is_file() or (SONGS_DIR / 'assets' / audio).is_file()
+        )),
     }
 
 def create_user(username, email, password):
@@ -67,7 +80,7 @@ def update_user_profile(user_id, username, email):
 def get_all_songs():
     conn = get_connection()
     c = conn.cursor()
-    c.execute("SELECT id, title, artist, length, plays, unlocked, genre, image FROM songs")
+    c.execute("SELECT id, title, artist, length, plays, unlocked, genre, image, audio FROM songs")
     rows = c.fetchall()
     conn.close()
     return [_song_row_to_dict(row) for row in rows]
@@ -75,7 +88,7 @@ def get_all_songs():
 def get_song_by_id(song_id):
     conn = get_connection()
     c = conn.cursor()
-    c.execute("SELECT id, title, artist, length, plays, unlocked, genre, image FROM songs WHERE id = ?", (song_id,))
+    c.execute("SELECT id, title, artist, length, plays, unlocked, genre, image, audio FROM songs WHERE id = ?", (song_id,))
     row = c.fetchone()
     conn.close()
     return _song_row_to_dict(row) if row else None
@@ -99,7 +112,7 @@ def get_saved_songs_for_user(user_id):
     conn = get_connection()
     c = conn.cursor()
     c.execute("""
-        SELECT songs.id, songs.title, songs.artist, songs.length, songs.plays, songs.unlocked, songs.genre, songs.image
+        SELECT songs.id, songs.title, songs.artist, songs.length, songs.plays, songs.unlocked, songs.genre, songs.image, songs.audio
         FROM songs
         JOIN unlocked_songs ON songs.id = unlocked_songs.song_id
         WHERE unlocked_songs.user_id = ?
@@ -147,7 +160,7 @@ def search_songs_by_query(query):
     c = conn.cursor()
     q = f"%{query.lower()}%"
     c.execute("""
-        SELECT id, title, artist, length, plays, unlocked, genre, image
+        SELECT id, title, artist, length, plays, unlocked, genre, image, audio
         FROM songs
         WHERE LOWER(title) LIKE ?
            OR LOWER(artist) LIKE ?

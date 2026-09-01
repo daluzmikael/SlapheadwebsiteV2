@@ -1,17 +1,26 @@
 // src/components/songcard.jsx
 
-export default function SongCard({ id, title, artist, length, plays, unlocked, genre }) {
+export default function SongCard({
+  id,
+  title,
+  artist,
+  length,
+  genre,
+  image,
+  onRemove,
+  onSave,
+}) {
   return (
     <div className="border p-4 rounded shadow text-center bg-white song-card">
       {image && (
         <img
           src={`/images/${image}`}
-          alt={`${name} the ${species}`}
+          alt={`${title} artwork`}
           className="w-full h-48 object-cover rounded mb-4"
         />
       )}
-      <h3 className="text-xl font-bold">{name}</h3>
-      <p className="text-gray-600">{species} • {breed}</p>
+      <h3 className="text-xl font-bold">{title}</h3>
+      <p className="text-gray-600">{artist} • {genre} • {length}</p>
 
       {onRemove ? (
         <button
